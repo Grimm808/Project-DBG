@@ -2,3 +2,4 @@ DBG/*
 __pycache__/*
 game_data/bot_token.json
 .vscode/*
+
