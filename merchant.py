@@ -13,7 +13,7 @@ logging.basicConfig(handlers=[logging.FileHandler(filename="logs/merchant.log",
                     datefmt="%F %A %T",
                     level=logging.INFO)
 
-with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
+with open("./game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["Merchant"]
     f.close()

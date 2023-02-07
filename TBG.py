@@ -18,7 +18,7 @@ import logging
 
 #still needs to work on shop and balancing and adding new items
 
-with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
+with open("./game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["DBG"]
     f.close()

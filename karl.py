@@ -9,7 +9,7 @@ from discord.ext import tasks, commands
 
 db = database.Database()
 
-with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
+with open("./game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["Karl"]
     f.close()
