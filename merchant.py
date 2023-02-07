@@ -8,22 +8,23 @@ from discord.ext.commands import Bot
 from discord.ext import tasks, commands
 
 logging.basicConfig(handlers=[logging.FileHandler(filename="logs/merchant.log",
-                                                 encoding='utf-8', mode='a+')],
+                                                  encoding='utf-8', mode='a+')],
                     format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
                     datefmt="%F %A %T",
                     level=logging.INFO)
 
-with open("./game_data/bot_token.json","r") as f:
+with open("./game_data/bot_token.json", "r") as f:
     file = json.load(f)
     token = file["Merchant"]
     f.close()
 
 db = database.Database()
 
+
 class merchant:
-    def __init__(self,token):
+    def __init__(self, token):
         self.token = token
-        self.client = Bot(command_prefix=".",intents=discord.Intents.all())
+        self.client = Bot(command_prefix=".", intents=discord.Intents.all())
         self.shop = game.shop()
         self.client.remove_command("help")
         self.prepare_client()
@@ -31,7 +32,7 @@ class merchant:
     def run(self):
         self.client.run(self.token)
 
-    def get_discord_emoji(self,emoji_id):
+    def get_discord_emoji(self, emoji_id):
         return self.client.get_emoji(int(emoji_id))
 
     def prepare_client(self):
@@ -56,7 +57,8 @@ class merchant:
             ShopEmbed = discord.Embed(colour=discord.Colour.green())
             ShopEmbed.set_author(name="MERCHANT'S SHOP")
             for item_name in self.shop.return_items():
-                ShopEmbed.add_field(name=f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} **{item_name}**",value=f"`COST` {int(db.get_item(game.hash_string(item_name))[2]*0.95)}")
+                ShopEmbed.add_field(
+                    name=f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} **{item_name}**", value=f"`COST` {int(db.get_item(game.hash_string(item_name))[2]*0.95)}")
             await ctx.message.channel.send(embed=ShopEmbed)
 
         @self.client.command()
@@ -76,15 +78,15 @@ class merchant:
                 await ctx.message.channel.send("you can't have over 20 items")
                 return
             for abbreviation in database.abbreviations:
-                item_name = item_name.replace(abbreviation[0],abbreviation[1])
+                item_name = item_name.replace(abbreviation[0], abbreviation[1])
             if db.get_item(game.hash_string(item_name)) is None:
                 await ctx.message.channel.send(f"{item_name} is not a valid item")
                 return
             price = db.get_item(game.hash_string(item_name))[2]
             if item_name in self.shop.return_items():
                 price = price*0.95
-            if game.update_money(user.id,-price*amount):
-                db.add_item(user.id,game.hash_string(item_name),amount)
+            if game.update_money(user.id, -price*amount):
+                db.add_item(user.id, game.hash_string(item_name), amount)
                 await ctx.message.channel.send(f"{user.mention} bought {str(amount)} X {item_name}")
                 logging.info(f"{user.id} bought {str(amount)} X {item_name}")
                 return
@@ -102,17 +104,20 @@ class merchant:
             else:
                 item_name = " ".join(message_contents[1:])
             for abbreviation in database.abbreviations:
-                item_name = item_name.replace(abbreviation[0],abbreviation[1])
+                item_name = item_name.replace(abbreviation[0], abbreviation[1])
             if item_name not in user_inv.keys():
                 await ctx.message.channel.send(f"you don't have any {item_name}")
                 return
             if user_inv[item_name] >= amount:
-                game.update_money(user.id,int(db.get_item(game.hash_string(item_name))[2]*amount/4))
+                game.update_money(user.id, int(db.get_item(
+                    game.hash_string(item_name))[2]*amount/4))
                 await ctx.message.channel.send(f"{user.mention} sold {str(amount)} X {item_name} for {int(db.get_item(game.hash_string(item_name))[2]*amount/4)}{self.get_discord_emoji(822330641559191573)}")
-                db.add_item(user.id,game.hash_string(item_name),-amount)
-                logging.info(f"{str(user.id)} has removed {str(amount)} X {item_name}")
+                db.add_item(user.id, game.hash_string(item_name), -amount)
+                logging.info(
+                    f"{str(user.id)} has removed {str(amount)} X {item_name}")
                 return
             await ctx.message.channel.send(f"you don't have enough {item_name}, my friend")
+
 
 if __name__ == "__main__":
     MerchantBot = merchant(token)
