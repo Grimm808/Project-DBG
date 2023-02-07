@@ -12,34 +12,34 @@ import asyncio
 
 import logging
 
-#add a boss thing and show everyone it afterwards
+# add a boss thing and show everyone it afterwards
 
-#wfurther troubleshoot the change class function
+# further troubleshoot the change class function
 
-#still needs to work on shop and balancing and adding new items
+# still needs to work on shop and balancing and adding new items
 
-with open("./game_data/bot_token.json","r") as f:
+with open("./game_data/bot_token.json", "r") as f:
     file = json.load(f)
     token = file["DBG"]
     f.close()
 
 id = {
-    "guild":393092518042140672,
-    "channel":{
-        "great-plains":1072309424858865695,
-        "greater-plains":1072311623097790494,
-        "forest":1072311663744798751,
-        "mountain":1072311689917247670,
-        "shores":1072311709081018458,
-        "prairies":1072311753783902238,
-        "valley":1072311775099371530,
-        "out-skirts":1072311796368675016
+    "guild": 393092518042140672,
+    "channel": {
+        "great-plains": 1072309424858865695,
+        "greater-plains": 1072311623097790494,
+        "forest": 1072311663744798751,
+        "mountain": 1072311689917247670,
+        "shores": 1072311709081018458,
+        "prairies": 1072311753783902238,
+        "valley": 1072311775099371530,
+        "out-skirts": 1072311796368675016
     },
-    "role":{
-        "First Floor":877285049324679188,
-        "Second Floor":877285228807336027,
-        "Third Floor":877285221039501352,
-        "Main Island":877288700613132308
+    "role": {
+        "First Floor": 877285049324679188,
+        "Second Floor": 877285228807336027,
+        "Third Floor": 877285221039501352,
+        "Main Island": 877288700613132308
     }
 }
 
@@ -76,13 +76,14 @@ Karl commands:
 .drink  Karl gives you free water (30m) cooldown
 ```'''
 
-stats_target = ["HP","Max HP","STR","MAG","SPD","DEF","LOG"]
+stats_target = ["HP", "Max HP", "STR", "MAG", "SPD", "DEF", "LOG"]
+
 
 class TBG:
     def __init__(self, token):
         intents = discord.Intents.all()
         intents.members = True
-        self.client = Bot(command_prefix=command_prefix,intents=intents)
+        self.client = Bot(command_prefix=command_prefix, intents=intents)
         self.client.remove_command("help")
         self.token = token
         self.prepare_client()
@@ -90,86 +91,109 @@ class TBG:
     def run(self):
         self.client.run(self.token)
 
-    def get_discord_emoji(self,emoji_id):
+    def get_discord_emoji(self, emoji_id):
         return self.client.get_emoji(int(emoji_id))
 
-    async def setup_player(self,user):
+    async def setup_player(self, user):
         if db.get_user(user.id) is None:
             db.add_user(user.id)
-            db.add_character(character.generate_character(user.id,user.display_name,"swordsmen",game.hash_string("stone sword"),0))
-            db.add_bank(user.id,100)
+            db.add_character(character.generate_character(
+                user.id, user.display_name, "swordsmen", game.hash_string("stone sword"), 0))
+            db.add_bank(user.id, 100)
 
     async def setup_all_players(self):
         async for member in self.guild.fetch_members(limit=150):
             if not member.bot:
                 await self.setup_player(member)
 
-    def create_enemy_embed(self,char_data):
+    def create_enemy_embed(self, char_data):
         coloring = discord.Colour.red()
-        if char_data[6] == 0: coloring = discord.Colour.dark_grey()
-        StatEmbed = discord.Embed(colour=coloring,description=f"`LVL` {str(char_data[4])}\n`CLS` {char_data[3]}")
+        if char_data[6] == 0:
+            coloring = discord.Colour.dark_grey()
+        StatEmbed = discord.Embed(
+            colour=coloring, description=f"`LVL` {str(char_data[4])}\n`CLS` {char_data[3]}")
         StatEmbed.set_author(name=char_data[1].upper())
         StatEmbed.set_thumbnail(url=db.get_graphic(char_data[3])[1])
-        StatEmbed.add_field(name=f"{str(char_data[6])}/{str(char_data[7])} ❤️",value=f"`STR` {char_data[8]}\n`MAG` {char_data[9]}\n`SPD` {char_data[10]}\n`DEF` {char_data[11]}\n`LOG` {char_data[12]}")
-        item_data, itemname = db.get_weapon(char_data[2]), db.get_item(char_data[2])[1]
-        StatEmbed.add_field(name=f"{self.get_discord_emoji(db.get_graphic(itemname)[1])} {itemname}",value=f"`PWR` {item_data[2]}\n`CRT` {item_data[3]}")
+        StatEmbed.add_field(name=f"{str(char_data[6])}/{str(char_data[7])} ❤️",
+                            value=f"`STR` {char_data[8]}\n`MAG` {char_data[9]}\n`SPD` {char_data[10]}\n`DEF` {char_data[11]}\n`LOG` {char_data[12]}")
+        item_data, itemname = db.get_weapon(
+            char_data[2]), db.get_item(char_data[2])[1]
+        StatEmbed.add_field(
+            name=f"{self.get_discord_emoji(db.get_graphic(itemname)[1])} {itemname}", value=f"`PWR` {item_data[2]}\n`CRT` {item_data[3]}")
         enemy_loot = ""
         for loot_items in char_data[13].split("-"):
             loot_values = loot_items.split(".")
             enemy_loot += f"{loot_values[0]} - {loot_values[1]} "
-        if char_data[14] != "": StatEmbed.set_footer(text=char_data[14])
+        if char_data[14] != "":
+            StatEmbed.set_footer(text=char_data[14])
         return StatEmbed
 
-    def create_character_embed(self,char_data):
-        StatEmbed = discord.Embed(colour=discord.Colour.dark_green(),description=f"`LVL` {str(char_data[4])} ({int((char_data[5]/character.next_level(char_data[4]))*100)}%) \n `CLS` {char_data[3]}")
+    def create_character_embed(self, char_data):
+        StatEmbed = discord.Embed(colour=discord.Colour.dark_green(
+        ), description=f"`LVL` {str(char_data[4])} ({int((char_data[5]/character.next_level(char_data[4]))*100)}%) \n `CLS` {char_data[3]}")
         StatEmbed.set_author(name=char_data[1].upper())
         StatEmbed.set_thumbnail(url=db.get_graphic(char_data[3])[1])
-        StatEmbed.add_field(name=f"{str(char_data[6])}/{str(char_data[7])} ❤️",value=f"`STR` {char_data[8]}\n`MAG` {char_data[9]}\n`SPD` {char_data[10]}\n`DEF` {char_data[11]}\n`LOG` {char_data[12]}")
-        item_data, itemname = db.get_weapon(char_data[2]), db.get_item(char_data[2])[1]
-        StatEmbed.add_field(name=f"{self.get_discord_emoji(db.get_graphic(itemname)[1])} {itemname}",value=f"`PWR` {item_data[2]}\n`CRT` {item_data[3]}")
+        StatEmbed.add_field(name=f"{str(char_data[6])}/{str(char_data[7])} ❤️",
+                            value=f"`STR` {char_data[8]}\n`MAG` {char_data[9]}\n`SPD` {char_data[10]}\n`DEF` {char_data[11]}\n`LOG` {char_data[12]}")
+        item_data, itemname = db.get_weapon(
+            char_data[2]), db.get_item(char_data[2])[1]
+        StatEmbed.add_field(
+            name=f"{self.get_discord_emoji(db.get_graphic(itemname)[1])} {itemname}", value=f"`PWR` {item_data[2]}\n`CRT` {item_data[3]}")
         return StatEmbed
 
-    def create_inventory_embed(self,inventory_data):
-        weapons, usables = "",""
+    def create_inventory_embed(self, inventory_data):
+        weapons, usables = "", ""
         for item_name in inventory_data:
-            if db.get_usable(game.hash_string(item_name)) is not None: usables += f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} {item_name} X {inventory_data[item_name]}\n"
-            if db.get_weapon(game.hash_string(item_name)) is not None: weapons += f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} {item_name} X {inventory_data[item_name]}\n"
+            if db.get_usable(game.hash_string(item_name)) is not None:
+                usables += f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} {item_name} X {inventory_data[item_name]}\n"
+            if db.get_weapon(game.hash_string(item_name)) is not None:
+                weapons += f"{self.get_discord_emoji(db.get_graphic(item_name)[1])} {item_name} X {inventory_data[item_name]}\n"
         InventoryEmbed = discord.Embed(colour=discord.Colour.green())
         InventoryEmbed.set_author(name="INVENTORY")
-        if weapons != "": InventoryEmbed.add_field(name="`Weapons`",value=weapons)
-        if usables != "": InventoryEmbed.add_field(name="`Usables`",value=usables)
+        if weapons != "":
+            InventoryEmbed.add_field(name="`Weapons`", value=weapons)
+        if usables != "":
+            InventoryEmbed.add_field(name="`Usables`", value=usables)
         return InventoryEmbed
 
-    def create_info_embed(self,name):
+    def create_info_embed(self, name):
         item_data = db.get_item(game.hash_string(name))
         usable_data = db.get_usable(game.hash_string(name))
         weapon_data = db.get_weapon(game.hash_string(name))
         class_data = db.get_class(name)
         if usable_data is not None:
-            InfoEmbed = discord.Embed(colour=discord.Colour.light_grey(),description=db.get_item(game.hash_string(name))[4])
+            InfoEmbed = discord.Embed(colour=discord.Colour.light_grey(
+            ), description=db.get_item(game.hash_string(name))[4])
             InfoEmbed.set_author(name=name)
-            InfoEmbed.set_thumbnail(url=self.get_discord_emoji(db.get_graphic(name)[1]).url)
-            InfoEmbed.add_field(name="`TARGET`",value=stats_target[usable_data[1]-6])
-            InfoEmbed.add_field(name="`AMT`",value=usable_data[2])
-            InfoEmbed.add_field(name="`COST`",value=item_data[2])
+            InfoEmbed.set_thumbnail(
+                url=self.get_discord_emoji(db.get_graphic(name)[1]).url)
+            InfoEmbed.add_field(
+                name="`TARGET`", value=stats_target[usable_data[1]-6])
+            InfoEmbed.add_field(name="`AMT`", value=usable_data[2])
+            InfoEmbed.add_field(name="`COST`", value=item_data[2])
             return InfoEmbed
         elif weapon_data is not None:
-            InfoEmbed = discord.Embed(colour=discord.Colour.light_grey(),description=db.get_item(game.hash_string(name))[4])
+            InfoEmbed = discord.Embed(colour=discord.Colour.light_grey(
+            ), description=db.get_item(game.hash_string(name))[4])
             InfoEmbed.set_author(name=name)
-            InfoEmbed.set_thumbnail(url=self.get_discord_emoji(db.get_graphic(name)[1]).url)
-            InfoEmbed.add_field(name="`TYPE`",value=weapon_data[1])
-            InfoEmbed.add_field(name="`PWR`",value=weapon_data[2])
-            InfoEmbed.add_field(name="`CRT`",value=weapon_data[3])
-            InfoEmbed.add_field(name="`COST`",value=item_data[2])
+            InfoEmbed.set_thumbnail(
+                url=self.get_discord_emoji(db.get_graphic(name)[1]).url)
+            InfoEmbed.add_field(name="`TYPE`", value=weapon_data[1])
+            InfoEmbed.add_field(name="`PWR`", value=weapon_data[2])
+            InfoEmbed.add_field(name="`CRT`", value=weapon_data[3])
+            InfoEmbed.add_field(name="`COST`", value=item_data[2])
             return InfoEmbed
         elif class_data is not None:
-            InfoEmbed = discord.Embed(colour=discord.Colour.light_grey(),description=class_data[2])
+            InfoEmbed = discord.Embed(
+                colour=discord.Colour.light_grey(), description=class_data[2])
             InfoEmbed.set_author(name=name)
             InfoEmbed.set_thumbnail(url=db.get_graphic(name)[1])
-            InfoEmbed.add_field(name="`GROWTH RATE`",value=class_data[1])
-            if class_data[3] == "": InfoEmbed.add_field(name="`ATTRIBUTE`",value="None")
-            else: InfoEmbed.add_field(name="`ATTRIBUTE`",value=class_data[3])
-            InfoEmbed.add_field(name="`WEAPON CHOICE`",value=class_data[4])
+            InfoEmbed.add_field(name="`GROWTH RATE`", value=class_data[1])
+            if class_data[3] == "":
+                InfoEmbed.add_field(name="`ATTRIBUTE`", value="None")
+            else:
+                InfoEmbed.add_field(name="`ATTRIBUTE`", value=class_data[3])
+            InfoEmbed.add_field(name="`WEAPON CHOICE`", value=class_data[4])
             return InfoEmbed
         else:
             return None
@@ -193,20 +217,21 @@ class TBG:
             await self.setup_player(member)
 
         @self.client.event
-        async def on_reaction_add(reaction,user):
+        async def on_reaction_add(reaction, user):
             if user != self.client.user:
                 msg = reaction.message
                 if db.get_enemy(msg.id) is not None and reaction.emoji == "⚔️" or reaction.emoji == "💢":
                     player_character = list(db.get_character(user.id))
                     if reaction.emoji == "💢":
-                        player_character[8]+=5
-                        player_character[10]-=6
-                    fight = game.battle(player_character,list(db.get_enemy(msg.id)),reaction.message,user)
+                        player_character[8] += 5
+                        player_character[10] -= 6
+                    fight = game.battle(player_character, list(
+                        db.get_enemy(msg.id)), reaction.message, user)
                     await fight.run()
                     player_character, enemy_character = fight.get_characters()
                     if reaction.emoji == "💢":
-                        player_character[8]-=5
-                        player_character[10]+=6
+                        player_character[8] -= 5
+                        player_character[10] += 6
                     db.update_character(player_character)
                     if enemy_character[6] == 0:
                         db.delete_enemy(msg.id)
@@ -235,9 +260,10 @@ class TBG:
             if db.get_bank(user.id) is None:
                 db.add_user(user.id)
             if db.get_character(user.id) is None:
-                db.add_character(character.generate_character(user.id,user.display_name,"swordsmen",game.hash_string("stone sword"),0))
+                db.add_character(character.generate_character(
+                    user.id, user.display_name, "swordsmen", game.hash_string("stone sword"), 0))
             if db.get_bank(user.id) is None:
-                db.add_bank(user.id,100)
+                db.add_bank(user.id, 100)
             await ctx.message.channel.send(f"{user.name} has been registered")
 
         @self.client.command()
@@ -252,7 +278,8 @@ class TBG:
         async def info(ctx):
             target_thing = ctx.message.content[6:]
             if target_thing == "":
-                embed = self.create_info_embed(db.get_character(ctx.message.author.id)[3])
+                embed = self.create_info_embed(
+                    db.get_character(ctx.message.author.id)[3])
             else:
                 embed = self.create_info_embed(target_thing)
             if embed is None:
@@ -269,7 +296,8 @@ class TBG:
             await ctx.message.channel.send(embed=StatEmbed)
 
 
-#user: user_id,daily,weekly,first,progress,resets,drinks
+# user: user_id,daily,weekly,first,progress,resets,drinks
+
         @self.client.command()
         async def user(ctx):
             user = ctx.message.author
@@ -277,11 +305,14 @@ class TBG:
             char_data = db.get_character(user.id)
             UserEmbed = discord.Embed(colour=discord.Colour.dark_green())
             UserEmbed.set_author(name=char_data[1].upper())
-            UserEmbed.add_field(name="`First-Time`",value=f"{user_data[3]}")
-            if user_data[4] == "":  UserEmbed.add_field(name="`Bosses-Defeated`",value="None")
-            else: UserEmbed.add_field(name="`Bosses-Defeated`",value=f"{user_data[4]}")
-            UserEmbed.add_field(name="`Prestige`",value=str(user_data[5]))
-            UserEmbed.add_field(name="`Drinks`",value=str(user_data[6]))
+            UserEmbed.add_field(name="`First-Time`", value=f"{user_data[3]}")
+            if user_data[4] == "":
+                UserEmbed.add_field(name="`Bosses-Defeated`", value="None")
+            else:
+                UserEmbed.add_field(name="`Bosses-Defeated`",
+                                    value=f"{user_data[4]}")
+            UserEmbed.add_field(name="`Prestige`", value=str(user_data[5]))
+            UserEmbed.add_field(name="`Drinks`", value=str(user_data[6]))
             await ctx.message.channel.send(embed=UserEmbed)
 
         @self.client.command()
@@ -305,7 +336,7 @@ class TBG:
         async def bank(ctx):
             await ctx.message.channel.send(f"You have {db.get_bank(ctx.message.author.id)[1]}{self.get_discord_emoji(822330641559191573)}")
 
-        @commands.cooldown(2,4)
+        @commands.cooldown(2, 4)
         @self.client.command()
         async def battle(ctx):
             if ctx.message.channel.id not in id["channel"].values():
@@ -314,29 +345,29 @@ class TBG:
             else:
                 level = db.get_character(ctx.message.author.id)[4]+5
                 if ctx.message.channel.id == id["channel"]["great-plains"] or ctx.message.channel.id == id["channel"]["greater-plains"]:
-                    level += random.randint(0,4)
-                    level = min(19,level-5)
+                    level += random.randint(0, 4)
+                    level = min(19, level-5)
                 elif ctx.message.channel.id == id["channel"]["forest"]:
-                    level += random.randint(0,8)
-                    level = min(39,level)
-                    level = max(20,level)
+                    level += random.randint(0, 8)
+                    level = min(39, level)
+                    level = max(20, level)
                 elif ctx.message.channel.id == id["channel"]["mountain"]:
-                    level += random.randint(0,12)
-                    level = min(59,level)
-                    level = max(40,level)
+                    level += random.randint(0, 12)
+                    level = min(59, level)
+                    level = max(40, level)
                 elif ctx.message.channel.id == id["channel"]["prairies"]:
-                    level += random.randint(0,15)
-                    level = min(65,level)
-                    level = max(45,level)
+                    level += random.randint(0, 15)
+                    level = min(65, level)
+                    level = max(45, level)
                 elif ctx.message.channel.id == id["channel"]["shores"]:
-                    level += random.randint(0,12)
-                    level = min(70,level)
-                    level = max(55,level)
+                    level += random.randint(0, 12)
+                    level = min(70, level)
+                    level = max(55, level)
                 elif ctx.message.channel.id == id["channel"]["valley"]:
-                    level += random.randint(0,10)
-                    level = min(75,level)
-                    level = max(60,level)
-                enemy_data = character.generate_enemy("enemy",level)
+                    level += random.randint(0, 10)
+                    level = min(75, level)
+                    level = max(60, level)
+                enemy_data = character.generate_enemy("enemy", level)
                 enemy_embed = self.create_enemy_embed(enemy_data)
                 msg = await ctx.message.channel.send(embed=enemy_embed)
                 enemy_data[0] = msg.id
@@ -346,7 +377,8 @@ class TBG:
 
         @self.client.command()
         async def prestige(ctx):
-            location_ids = {"First Floor":id["role"]["First Floor"],"Second Floor":id["role"]["Second Floor"],"Third Floor":id["role"]["Third Floor"]}
+            location_ids = {"First Floor": id["role"]["First Floor"], "Second Floor": id["role"]
+                            ["Second Floor"], "Third Floor": id["role"]["Third Floor"]}
             user = ctx.message.author
             char_data = list(db.get_character(user.id))
             user_data = list(db.get_user(user.id))
@@ -356,11 +388,12 @@ class TBG:
             num = int((char_data[4]-60)/20)+1
             user_data[5] += num
             user_data[6] = 0
-            char_data = character.generate_character(user.id,user.display_name,"swordsmen",game.hash_string("stone sword"),user_data[5])
+            char_data = character.generate_character(
+                user.id, user.display_name, "swordsmen", game.hash_string("stone sword"), user_data[5])
             db.update_user(user_data)
             db.update_character(char_data)
-            db.update_bank(user.id,-db.get_bank(user.id)[1])
-            db.update_bank(user.id,200)
+            db.update_bank(user.id, -db.get_bank(user.id)[1])
+            db.update_bank(user.id, 200)
             db.clear_inventory(user.id)
             member = await self.guild.fetch_member(user.id)
             for role in member.roles:
@@ -379,16 +412,18 @@ class TBG:
             if "red essence" not in db.get_inventory(user.id)[0].keys():
                 await ctx.message.channel.send("you need red essence to raid")
                 return
-            timer_data = db.get_timer(user.id,ctx.message.channel.id)
+            timer_data = db.get_timer(user.id, ctx.message.channel.id)
             if timer_data is not None:
                 dif = datetime.datetime.now()-timer_data[2]
                 if dif.seconds < 180:
                     await ctx.message.channel.send(f"{str(datetime.timedelta(seconds=180-int(dif.total_seconds())))} left")
                     return
                 else:
-                    db.update_timer(user.id,ctx.message.channel.id,datetime.datetime.now())
+                    db.update_timer(
+                        user.id, ctx.message.channel.id, datetime.datetime.now())
             else:
-                db.add_timer(user.id,ctx.message.channel.id,datetime.datetime.now())
+                db.add_timer(user.id, ctx.message.channel.id,
+                             datetime.datetime.now())
             if ctx.message.channel.id == id["channel"]["great-plains"]:
                 character_class = "Warlord"
                 level = 20
@@ -410,9 +445,10 @@ class TBG:
             elif ctx.message.channel.id == id["channel"]["out-skirts"]:
                 character_class = "Viking"
                 level = 100
-            boss_data = character.generate_boss("boss",level,character_class,game.hash_string(character.generate_class_weapon(character_class,level)))
+            boss_data = character.generate_boss("boss", level, character_class, game.hash_string(
+                character.generate_class_weapon(character_class, level)))
             boss_embed = self.create_enemy_embed(boss_data)
-            db.add_item(user.id,game.hash_string("red essence"),-1)
+            db.add_item(user.id, game.hash_string("red essence"), -1)
             msg = await ctx.message.channel.send("a boss fight ig")
             thread = await msg.create_thread(name="thread for ur boss fight")
             boss_msg = await thread.send(embed=boss_embed)
@@ -427,8 +463,9 @@ class TBG:
             user = ctx.message.author
             target_item = ctx.message.content[5:]
             for abbreviation in database.abbreviations:
-                target_item = target_item.replace(abbreviation[0],abbreviation[1])
-            if db.get_user_item(user.id,game.hash_string(target_item)) is None:
+                target_item = target_item.replace(
+                    abbreviation[0], abbreviation[1])
+            if db.get_user_item(user.id, game.hash_string(target_item)) is None:
                 await ctx.message.channel.send(f"you don't have a {target_item}")
                 return
             item_data = db.get_usable(game.hash_string(target_item))
@@ -436,9 +473,9 @@ class TBG:
                 await ctx.message.channel.send(f"{target_item} is not a valid item")
                 return
             char_data = list(db.get_character(user.id))
-            db.add_item(user.id,game.hash_string(target_item),-1)
-            char_data[item_data[1]]+=item_data[2]
-            char_data = await character.character_check(char_data,ctx.message.author,ctx.message)
+            db.add_item(user.id, game.hash_string(target_item), -1)
+            char_data[item_data[1]] += item_data[2]
+            char_data = await character.character_check(char_data, ctx.message.author, ctx.message)
             db.update_character(char_data)
             await ctx.message.channel.send(f"you gained {item_data[2]} {stats_target[item_data[1]-6]}")
 
@@ -447,19 +484,20 @@ class TBG:
             user = ctx.message.author
             message_contents = ctx.message.content[7:]
             weapon_id = game.hash_string(message_contents)
-            if db.get_user_item(user.id,weapon_id) is not None:
+            if db.get_user_item(user.id, weapon_id) is not None:
                 target_weapon = db.get_weapon(weapon_id)
                 if target_weapon is not None:
                     character_data = list(db.get_character(user.id))
-                    boolean, error_str = character.can_equip(character_data,target_weapon)
+                    boolean, error_str = character.can_equip(
+                        character_data, target_weapon)
                     if not boolean:
                         await ctx.message.channel.send(error_str)
                         return
                     if target_weapon[1] in character.get_class_weapons(character_data[3]):
                         if character_data[2] != game.hash_string("fist"):
-                            db.add_item(user.id,character_data[2],1)
+                            db.add_item(user.id, character_data[2], 1)
                         character_data[2] = weapon_id
-                        db.add_item(user.id,weapon_id,-1)
+                        db.add_item(user.id, weapon_id, -1)
                         db.update_character(character_data)
                         await ctx.message.channel.send(f"{message_contents} has been equiped")
                         return
@@ -477,7 +515,7 @@ class TBG:
             if dif.total_seconds() >= 43200:
                 user_data[1] = datetime.datetime.now()
                 db.update_user(user_data)
-                game.update_money(user.id,50)
+                game.update_money(user.id, 50)
                 await ctx.message.channel.send(f"{user.mention} has claimed his daily 50{self.get_discord_emoji(822330641559191573)}")
                 return
             await ctx.message.channel.send(f"{str(datetime.timedelta(seconds=43200-int(dif.total_seconds())))} left")
@@ -490,7 +528,7 @@ class TBG:
             if dif.days >= 7:
                 user_data[2] = datetime.datetime.now()
                 db.update_user(user_data)
-                game.update_money(user.id,100)
+                game.update_money(user.id, 100)
                 await ctx.message.channel.send(f"{user.mention} has claimed his weekly 100{self.get_discord_emoji(822330641559191573)}")
                 return
             await ctx.message.channel.send(f"{str(datetime.timedelta(seconds=604800-int(dif.total_seconds())))} left")
@@ -510,10 +548,10 @@ class TBG:
                 await ctx.message.channel.send(f"you need to be at least level 20 to changed to {target_class}")
             elif target_class in character.advanced_classes and character_data[4] < 40:
                 await ctx.message.channel.send(f"you need to be at least level 40 to changed to {target_class}")
-            elif character.change_class(character_data,target_class):
+            elif character.change_class(character_data, target_class):
                 character_data[3] = target_class
                 db.update_character(character_data)
-                db.add_item(user.id,game.hash_string("test seal"),-1)
+                db.add_item(user.id, game.hash_string("test seal"), -1)
                 await ctx.message.channel.send(f"{character_data[1]}'s class has been changed to {target_class}")
             else:
                 requirements = character.class_requirement(target_class)
@@ -528,12 +566,14 @@ class TBG:
         async def travel(ctx):
             user = ctx.message.author
             target_location = ctx.message.content[8:].title()
-            location_ids = {"First Floor":id["role"]["First Floor"],"Second Floor":id["role"]["Second Floor"],"Third Floor":id["role"]["Third Floor"]}
+            location_ids = {"First Floor": id["role"]["First Floor"], "Second Floor": id["role"]
+                            ["Second Floor"], "Third Floor": id["role"]["Third Floor"]}
             if target_location == "":
                 TravelEmbed = discord.Embed(colour=discord.Colour.orange())
                 TravelEmbed.set_author(name="Travel Locations")
                 for location_name in location_ids:
-                    TravelEmbed.add_field(name=f"**{location_name}**",value="`COST` transportation ticket",inline=False)
+                    TravelEmbed.add_field(
+                        name=f"**{location_name}**", value="`COST` transportation ticket", inline=False)
                 await ctx.message.channel.send(embed=TravelEmbed)
                 return
             if "transportation ticket" not in db.get_inventory(user.id)[0].keys():
@@ -553,7 +593,7 @@ class TBG:
                         return
                     await member.remove_roles(role)
             await member.add_roles(self.guild.get_role(id["role"][target_location]))
-            db.add_item(user.id,game.hash_string("transportation ticket"),-1)
+            db.add_item(user.id, game.hash_string("transportation ticket"), -1)
             await ctx.message.channel.send(f"{user.mention} has been transported to {target_location}")
 
         @commands.has_any_role("mod")
@@ -585,10 +625,12 @@ class TBG:
         async def complete_reset(ctx):
             now = datetime.datetime.now()
             user = ctx.message.author
-            db.update_character(character.generate_character(user.id,user.display_name,"swordsmen",game.hash_string("stone sword"),0))
-            db.update_user((user.id, now-datetime.timedelta(days=1), now-datetime.timedelta(days=7), now.date(), "", 0, 0))
+            db.update_character(character.generate_character(
+                user.id, user.display_name, "swordsmen", game.hash_string("stone sword"), 0))
+            db.update_user((user.id, now-datetime.timedelta(days=1),
+                           now-datetime.timedelta(days=7), now.date(), "", 0, 0))
             db.clear_inventory(user.id)
-            db.update_bank(user.id,200)
+            db.update_bank(user.id, 200)
             await ctx.message.channel.send("account completely cleared")
 
         @commands.has_any_role("mod")
@@ -596,7 +638,8 @@ class TBG:
         async def god_mode(ctx):
             now = datetime.datetime.now()
             user = ctx.message.author
-            db.update_character((user.id, user.display_name, game.hash_string("stone sword"), "swordsmen", 100, 0, 100, 100, 100, 100, 100, 100, 100))
+            db.update_character((user.id, user.display_name, game.hash_string(
+                "stone sword"), "swordsmen", 100, 0, 100, 100, 100, 100, 100, 100, 100))
 
         @commands.has_any_role("mod")
         @self.client.command()
@@ -609,7 +652,7 @@ class TBG:
         @self.client.command()
         async def money(ctx):
             user = ctx.message.author
-            game.update_money(user.id,1000)
+            game.update_money(user.id, 1000)
 
 
 if __name__ == "__main__":
