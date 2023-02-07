@@ -1,0 +1,297 @@
+2023-02-06 Monday 23:07:19 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:07:19 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:07:20 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 42a278e1e45302a627fff29b9e4063fc).
+2023-02-06 Monday 23:24:15 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:24:15 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:24:16 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 75bce06890aa59c83403f2e300e1e77e).
+2023-02-06 Monday 23:25:25 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:25:25 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:25:26 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 2b90af92ffc6ffb3b60a99388135edb1).
+2023-02-06 Monday 23:31:36 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:31:36 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:31:37 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 808e6e2fc43783803fab358dea558bf8).
+2023-02-06 Monday 23:33:04 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:33:04 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:33:05 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 8032c62accdd52d82c64a46968b79da0).
+2023-02-06 Monday 23:33:06 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:33:06 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:33:07 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: be8461d796e5797d0fa7f31efd70cd5b).
+2023-02-06 Monday 23:33:09 discord.client:ERROR:Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/TBG.py", line 180, in on_ready
+    self.guild = await self.client.fetch_guild(811159707757707304)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 1511, in fetch_guild
+    data = await self.http.get_guild(guild_id, with_counts=with_counts)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10004): Unknown Guild
+2023-02-06 Monday 23:34:31 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:34:31 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:34:32 user:INFO:refreshing items
+2023-02-06 Monday 23:34:32 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:34:32 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:34:32 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: cf85a21a55a05a6ca536e8291d94ab55).
+2023-02-06 Monday 23:34:33 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: a80a5b0e336a73660dd9c8203953a4f6).
+2023-02-06 Monday 23:34:33 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:34:33 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:34:34 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 8d065d0c1d5dabb50c73b1055f275a72).
+2023-02-06 Monday 23:34:35 user:INFO:refreshing items
+2023-02-06 Monday 23:34:36 discord.client:ERROR:Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/TBG.py", line 180, in on_ready
+    self.guild = await self.client.fetch_guild(811159707757707304)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 1511, in fetch_guild
+    data = await self.http.get_guild(guild_id, with_counts=with_counts)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10004): Unknown Guild
+2023-02-06 Monday 23:35:21 user:INFO:refreshing items
+2023-02-06 Monday 23:35:21 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:35:21 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:35:21 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:35:21 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:35:22 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: babf0f377288580ca03dd34c2668a96b).
+2023-02-06 Monday 23:35:22 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 17d880555015c7e7179497301e629067).
+2023-02-06 Monday 23:35:23 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:35:23 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:35:24 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: bde5a09c5fe97d2657f540f2781b8936).
+2023-02-06 Monday 23:35:24 user:INFO:refreshing items
+2023-02-06 Monday 23:35:26 discord.client:ERROR:Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/TBG.py", line 180, in on_ready
+    self.guild = await self.client.fetch_guild(811159707757707304)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 1511, in fetch_guild
+    data = await self.http.get_guild(guild_id, with_counts=with_counts)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10004): Unknown Guild
+2023-02-06 Monday 23:37:17 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:37:17 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:37:17 user:INFO:refreshing items
+2023-02-06 Monday 23:37:17 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:37:17 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:37:18 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 11fe3b7d6c36b896f655f0020cdd8fa6).
+2023-02-06 Monday 23:37:18 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: c09350a178f4ba636da3264face9dcb2).
+2023-02-06 Monday 23:37:19 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:37:19 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:37:20 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 56dfd89f37bad54a97272c5e8ad7a1cf).
+2023-02-06 Monday 23:37:20 user:INFO:refreshing items
+2023-02-06 Monday 23:37:22 discord.client:ERROR:Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/TBG.py", line 180, in on_ready
+    self.guild = await self.client.fetch_guild(393092518042140672)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 1511, in fetch_guild
+    data = await self.http.get_guild(guild_id, with_counts=with_counts)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10004): Unknown Guild
+2023-02-06 Monday 23:41:22 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:41:22 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:41:22 user:INFO:refreshing items
+2023-02-06 Monday 23:41:22 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:41:22 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:41:23 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 09efdf64ce9506b829b240d6aa7201ea).
+2023-02-06 Monday 23:41:23 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 16fc0f67997555de8166fa712685c05b).
+2023-02-06 Monday 23:41:24 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:41:24 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:41:25 user:INFO:refreshing items
+2023-02-06 Monday 23:41:25 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 98230f8ca6dd4662e89ba94c092428bf).
+2023-02-06 Monday 23:41:27 discord.client:ERROR:Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/TBG.py", line 180, in on_ready
+    self.guild = await self.client.fetch_guild(393092518042140672)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 1511, in fetch_guild
+    data = await self.http.get_guild(guild_id, with_counts=with_counts)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10004): Unknown Guild
+2023-02-06 Monday 23:59:42 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:59:42 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:59:42 user:INFO:refreshing items
+2023-02-06 Monday 23:59:42 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:59:42 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:59:43 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: ba8cb943048c1cd52bc2f023a6a92c7b).
+2023-02-06 Monday 23:59:43 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: c1cffa9a1b94b6723ef57f28e0b505f7).
+2023-02-06 Monday 23:59:44 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-06 Monday 23:59:44 discord.client:INFO:logging in using static token
+2023-02-06 Monday 23:59:45 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 9c1432c395918311a074871e0e006735).
+2023-02-06 Monday 23:59:45 user:INFO:refreshing items
+789930783765692436 has been added
+2023-02-06 Monday 23:59:47 user:INFO:789930783765692436 has been added
+604421506214395935 has been added
+2023-02-06 Monday 23:59:47 user:INFO:604421506214395935 has been added
+604420811620614146 has been added
+2023-02-06 Monday 23:59:47 user:INFO:604420811620614146 has been added
+450416132701159424 has been added
+2023-02-06 Monday 23:59:47 user:INFO:450416132701159424 has been added
+438390275271032833 has been added
+2023-02-06 Monday 23:59:47 user:INFO:438390275271032833 has been added
+431942576392765440 has been added
+2023-02-06 Monday 23:59:47 user:INFO:431942576392765440 has been added
+390985878438281216 has been added
+2023-02-06 Monday 23:59:47 user:INFO:390985878438281216 has been added
+310407000284463105 has been added
+2023-02-06 Monday 23:59:47 user:INFO:310407000284463105 has been added
+304364298954604546 has been added
+2023-02-06 Monday 23:59:47 user:INFO:304364298954604546 has been added
+277778559026724875 has been added
+2023-02-06 Monday 23:59:47 user:INFO:277778559026724875 has been added
+241274270909464578 has been added
+2023-02-06 Monday 23:59:47 user:INFO:241274270909464578 has been added
+230839918321074176 has been added
+2023-02-06 Monday 23:59:47 user:INFO:230839918321074176 has been added
+172044070531629056 has been added
+2023-02-06 Monday 23:59:47 user:INFO:172044070531629056 has been added
+141481658082787328 has been added
+2023-02-06 Monday 23:59:47 user:INFO:141481658082787328 has been added
+101068812769583104 has been added
+2023-02-06 Monday 23:59:48 user:INFO:101068812769583104 has been added
+92044600339861504 has been added
+2023-02-06 Monday 23:59:48 user:INFO:92044600339861504 has been added
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:04:43 user:INFO:141481658082787328 has been updated
+141481658082787328 has gained 50 dollars
+2023-02-07 Tuesday 00:04:43 user:INFO:141481658082787328 has gained 50 dollars
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:04:47 user:INFO:141481658082787328 has been updated
+141481658082787328 has gained 100 dollars
+2023-02-07 Tuesday 00:04:47 user:INFO:141481658082787328 has gained 100 dollars
+2023-02-07 Tuesday 00:09:51 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:09:51 user:INFO:refreshing items
+2023-02-07 Tuesday 00:09:51 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-07 Tuesday 00:09:51 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:09:52 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: f13e6e30405ee5168bf7930422df4afa).
+2023-02-07 Tuesday 00:09:52 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: f82837c1cee588c65508d12cffe330ce).
+2023-02-07 Tuesday 00:09:53 discord.ext.commands.bot:WARNING:Privileged message content intent is missing, commands may not work as expected.
+2023-02-07 Tuesday 00:09:53 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:09:54 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 50dee835b375df0f47471327a3219a18).
+2023-02-07 Tuesday 00:09:54 user:INFO:refreshing items
+2023-02-07 Tuesday 00:11:51 user:INFO:refreshing items
+2023-02-07 Tuesday 00:11:51 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:11:51 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:11:52 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: cec4d185f91843e80cbba53c917d9c80).
+2023-02-07 Tuesday 00:11:52 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 5e96c6f4441cc820ba3a4d1181a6ed2f).
+2023-02-07 Tuesday 00:11:53 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:11:54 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 9fee2b84c2e8df05976257262210deab).
+2023-02-07 Tuesday 00:11:54 user:INFO:refreshing items
+2023-02-07 Tuesday 00:17:45 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:17:45 user:INFO:refreshing items
+2023-02-07 Tuesday 00:17:45 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:17:45 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 36943a3f7c38ad8d40718f7b62f525aa).
+2023-02-07 Tuesday 00:17:46 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 32c1295926af8679f8f1d0cd97fe84ea).
+2023-02-07 Tuesday 00:17:47 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:17:47 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: de8692646d65d9df22a3aa110a73dd4a).
+2023-02-07 Tuesday 00:17:47 user:INFO:refreshing items
+2023-02-07 Tuesday 00:22:00 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:22:00 user:INFO:refreshing items
+2023-02-07 Tuesday 00:22:00 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:22:01 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: c718cc8142670e3a3ec58529d1dc1de6).
+2023-02-07 Tuesday 00:22:01 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 15dbb2796aa631336b8e44eeaa969ad0).
+2023-02-07 Tuesday 00:22:02 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:22:02 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: f5209c34f5431f4629a15db90c74ffe8).
+2023-02-07 Tuesday 00:22:03 user:INFO:refreshing items
+141481658082787328 has gained 3 dollars
+2023-02-07 Tuesday 00:22:12 user:INFO:141481658082787328 has gained 3 dollars
+141481658082787328 has gained 3 dollars
+2023-02-07 Tuesday 00:22:12 user:INFO:141481658082787328 has gained 3 dollars
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:22:12 user:INFO:141481658082787328 has been updated
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:22:12 user:INFO:141481658082787328 has been updated
+141481658082787328 has gained 2 dollars
+2023-02-07 Tuesday 00:22:49 user:INFO:141481658082787328 has gained 2 dollars
+141481658082787328 has gained 2 dollars
+2023-02-07 Tuesday 00:22:49 user:INFO:141481658082787328 has gained 2 dollars
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:22:49 user:INFO:141481658082787328 has been updated
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:22:49 user:INFO:141481658082787328 has been updated
+2023-02-07 Tuesday 00:24:55 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:24:55 user:INFO:refreshing items
+2023-02-07 Tuesday 00:24:55 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:24:56 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 8da23bd437ee8da07b0f3ac29166c7ba).
+2023-02-07 Tuesday 00:24:56 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 952e0c97bc7a9a50faa2fa6d6f25d6fd).
+2023-02-07 Tuesday 00:24:57 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:24:58 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: e6831b5c2ff5711a24cc5c158ba70103).
+2023-02-07 Tuesday 00:24:58 user:INFO:refreshing items
+141481658082787328 has gained 5 dollars
+2023-02-07 Tuesday 00:25:06 user:INFO:141481658082787328 has gained 5 dollars
+141481658082787328 has gained 5 dollars
+2023-02-07 Tuesday 00:25:06 user:INFO:141481658082787328 has gained 5 dollars
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:25:06 user:INFO:141481658082787328 has been updated
+141481658082787328 has been updated
+2023-02-07 Tuesday 00:25:06 user:INFO:141481658082787328 has been updated
+2023-02-07 Tuesday 00:30:13 user:INFO:refreshing items
+2023-02-07 Tuesday 00:30:13 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:30:13 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:30:14 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 94a31bb4ac96cfe50eda13da9848f8c2).
+2023-02-07 Tuesday 00:30:14 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 10983a25dcee8fcf99d225bc0e4aa432).
+2023-02-07 Tuesday 00:30:16 user:INFO:refreshing items
+2023-02-07 Tuesday 00:31:07 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:31:07 user:INFO:refreshing items
+2023-02-07 Tuesday 00:31:07 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:31:08 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: b12d7595c2ca7f7068144287a6757f8b).
+2023-02-07 Tuesday 00:31:08 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 5274ba836b647c8ce9f8c8e828412df4).
+2023-02-07 Tuesday 00:31:09 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:31:10 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 45aee43fb1e363a394daeb2755c3039f).
+2023-02-07 Tuesday 00:31:10 user:INFO:refreshing items
+2023-02-07 Tuesday 00:53:52 user:INFO:refreshing items
+2023-02-07 Tuesday 00:53:52 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:53:52 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:53:53 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 581b608c130aeaf60b59b4763996ddf6).
+2023-02-07 Tuesday 00:53:53 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 1826370e29e6c9d35019be07d83a9e09).
+2023-02-07 Tuesday 00:53:54 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:53:55 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: def3f43cb0175101d7aae2f2cc4b9dda).
+2023-02-07 Tuesday 00:53:55 user:INFO:refreshing items
+2023-02-07 Tuesday 00:55:09 user:INFO:1 of 75564801 has been added to 141481658082787328's inventory
+2023-02-07 Tuesday 00:56:25 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:56:25 user:INFO:refreshing items
+2023-02-07 Tuesday 00:56:25 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:56:26 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 276a3d9a65bc6eafacb5cc61be13a284).
+2023-02-07 Tuesday 00:56:26 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: bf2d08c2e7f790f8a0fecd53b189baf0).
+2023-02-07 Tuesday 00:56:27 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:56:28 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 311c3ad23956c48e9a851ca0df145ccc).
+2023-02-07 Tuesday 00:56:28 user:INFO:refreshing items
+2023-02-07 Tuesday 00:56:29 user:INFO:1 of 75564801 has been added to 141481658082787328's inventory
+2023-02-07 Tuesday 00:56:29 discord.client:ERROR:Ignoring exception in on_command_error
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/ext/commands/core.py", line 229, in wrapped
+    ret = await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/karl.py", line 89, in drink
+    await ctx.message.channel.send(f"{user.mention} here's your water {self.get_discord_emoji(db.get_graphic('potable_water')[1])}")
+TypeError: 'NoneType' object is not subscriptable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/client.py", line 409, in _run_event
+    await coro(*args, **kwargs)
+  File "/home/ryan/Projects/DBG/Project-DBG/karl.py", line 42, in on_command_error
+    raise error
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1349, in invoke
+    await ctx.command.invoke(ctx)
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/ext/commands/core.py", line 1023, in invoke
+    await injected(*ctx.args, **ctx.kwargs)  # type: ignore
+  File "/home/ryan/.local/lib/python3.10/site-packages/discord/ext/commands/core.py", line 238, in wrapped
+    raise CommandInvokeError(exc) from exc
+discord.ext.commands.errors.CommandInvokeError: Command raised an exception: TypeError: 'NoneType' object is not subscriptable
+2023-02-07 Tuesday 00:57:00 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:57:00 user:INFO:refreshing items
+2023-02-07 Tuesday 00:57:00 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:57:01 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: b0bf65f1645efffa02ef88b1fbe270ea).
+2023-02-07 Tuesday 00:57:01 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 532c2df64bc26ffec915c47b5aef2052).
+2023-02-07 Tuesday 00:57:02 discord.client:INFO:logging in using static token
+2023-02-07 Tuesday 00:57:03 discord.gateway:INFO:Shard ID None has connected to Gateway (Session ID: 692d45c771c83349c19102679978a91f).
+2023-02-07 Tuesday 00:57:03 user:INFO:refreshing items
+2023-02-07 Tuesday 00:57:07 user:INFO:1 of 75564801 has been added to 141481658082787328's inventory

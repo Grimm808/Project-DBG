@@ -9,7 +9,7 @@ from discord.ext import tasks, commands
 
 db = database.Database()
 
-with open("/home/pi/Atom/TBG/game_data/bot_token.json","r") as f:
+with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["Karl"]
     f.close()
@@ -20,7 +20,7 @@ stats_target = ["HP","Max HP","STR","MAG","SPD","DEF","LOG"]
 class tavernkeeper:
     def __init__(self,token):
         self.token = token
-        self.client = Bot(command_prefix=".")
+        self.client = Bot(command_prefix=".",intents=discord.Intents.all())
         self.client.remove_command("help")
         self.prepare_client()
 

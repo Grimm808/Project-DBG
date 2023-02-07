@@ -47,7 +47,7 @@ def hash_string(string_input):
 
 #the read and write has been updated to this so that the connections requests doesn't crash the mysql server
 def read_execute(query,values):
-    con = mysql.connect(host="localhost",user="pi",passwd="WUHANpja123",database = "TBG")
+    con = mysql.connect(host="localhost",user="root",passwd="root",database = "TBG")
     cur = con.cursor(buffered=True)
     cur.execute(query,values)
     answer = cur.fetchone()
@@ -56,7 +56,7 @@ def read_execute(query,values):
     return answer
 
 def read_all_execute(query,values):
-    con = mysql.connect(host="localhost",user="pi",passwd="WUHANpja123",database = "TBG")
+    con = mysql.connect(host="localhost",user="root",passwd="root",database = "TBG")
     cur = con.cursor(buffered=True)
     cur.execute(query,values)
     answer = cur.fetchall()
@@ -65,7 +65,7 @@ def read_all_execute(query,values):
     return answer
 
 def write_execute(query,values):
-    con = mysql.connect(host="localhost",user="pi",passwd="WUHANpja123",database = "TBG")
+    con = mysql.connect(host="localhost",user="root",passwd="root",database = "TBG")
     cur = con.cursor(buffered=True)
     cur.execute(query,values)
     cur.close()
@@ -73,7 +73,7 @@ def write_execute(query,values):
     con.close()
 
 def execute(query):
-    con = mysql.connect(host="localhost",user="pi",passwd="WUHANpja123",database = "TBG")
+    con = mysql.connect(host="localhost",user="root",passwd="root",database = "TBG")
     cur = con.cursor(buffered=True)
     cur.execute(query)
     cur.close()
@@ -320,7 +320,7 @@ class Database:
         execute("ALTER TABLE users ADD COLUMN drinks INT(11) NOT NULL;")
 
     def table_values(self,table_name):
-        con = mysql.connect(host="localhost",user="pi",passwd="WUHANpja123",database = "TBG")
+        con = mysql.connect(host="localhost",user="root",passwd="root",database = "TBG")
         cur = con.cursor()
         cur.execute(f"SELECT * FROM {table_name}")
         answer = cur.fetchall()

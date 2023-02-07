@@ -13,7 +13,7 @@ logging.basicConfig(handlers=[logging.FileHandler(filename="logs/merchant.log",
                     datefmt="%F %A %T",
                     level=logging.INFO)
 
-with open("/home/pi/Atom/TBG/game_data/bot_token.json","r") as f:
+with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["Merchant"]
     f.close()
@@ -23,7 +23,7 @@ db = database.Database()
 class merchant:
     def __init__(self,token):
         self.token = token
-        self.client = Bot(command_prefix=".")
+        self.client = Bot(command_prefix=".",intents=discord.Intents.all())
         self.shop = game.shop()
         self.client.remove_command("help")
         self.prepare_client()
@@ -112,7 +112,7 @@ class merchant:
                 db.add_item(user.id,game.hash_string(item_name),-amount)
                 logging.info(f"{str(user.id)} has removed {str(amount)} X {item_name}")
                 return
-            await message.channel.send(f"you don't have enough {item_name}, my friend")
+            await ctx.message.channel.send(f"you don't have enough {item_name}, my friend")
 
 if __name__ == "__main__":
     MerchantBot = merchant(token)

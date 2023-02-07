@@ -18,22 +18,22 @@ import logging
 
 #still needs to work on shop and balancing and adding new items
 
-with open("/home/pi/Atom/TBG/game_data/bot_token.json","r") as f:
+with open("/home/ryan/Projects/DBG/Project-DBG/game_data/bot_token.json","r") as f:
     file = json.load(f)
     token = file["DBG"]
     f.close()
 
 id = {
-    "guild":811159707757707304,
+    "guild":393092518042140672,
     "channel":{
-        "great-plains":877292758979727390,
-        "greater-plains":878788939966730270,
-        "forest":877292847215292526,
-        "mountain":877292917859954688,
-        "shores":889386108272668673,
-        "prairies":889221371253649458,
-        "valley":889376305156616252,
-        "out-skirts":889220953882648656
+        "great-plains":1072309424858865695,
+        "greater-plains":1072311623097790494,
+        "forest":1072311663744798751,
+        "mountain":1072311689917247670,
+        "shores":1072311709081018458,
+        "prairies":1072311753783902238,
+        "valley":1072311775099371530,
+        "out-skirts":1072311796368675016
     },
     "role":{
         "First Floor":877285049324679188,
@@ -80,7 +80,7 @@ stats_target = ["HP","Max HP","STR","MAG","SPD","DEF","LOG"]
 
 class TBG:
     def __init__(self, token):
-        intents = discord.Intents.default()
+        intents = discord.Intents.all()
         intents.members = True
         self.client = Bot(command_prefix=command_prefix,intents=intents)
         self.client.remove_command("help")
@@ -177,7 +177,7 @@ class TBG:
     def prepare_client(self):
         @self.client.event
         async def on_ready():
-            self.guild = await self.client.fetch_guild(811159707757707304)
+            self.guild = await self.client.fetch_guild(393092518042140672)
             await self.setup_all_players()
             print("ready for an adventure")
 
@@ -346,6 +346,7 @@ class TBG:
 
         @self.client.command()
         async def prestige(ctx):
+            location_ids = {"First Floor":id["role"]["First Floor"],"Second Floor":id["role"]["Second Floor"],"Third Floor":id["role"]["Third Floor"]}
             user = ctx.message.author
             char_data = list(db.get_character(user.id))
             user_data = list(db.get_user(user.id))
